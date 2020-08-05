@@ -1,0 +1,31 @@
+</doctype html>
+<html>
+<Head>
+<title> Welcome to signature </title>
+
+<script type="text/javascript" src="css\angular\angular.1.5.9.js"></script>
+<link rel="stylesheet" href="css\angular\angular-ui-tree.min.css">
+<script type="text/javascript" src="css\angular\angular-ui-tree.js"></script>
+<link href="css/style.css" rel="stylesheet"/>
+<script type="text/javascript" src="css\sample.js"></script>
+</head>
+<body ng-app="PlantdeskApp" ng-controller="PlantdeskController">
+    <div ui-tree>
+        <ol ui-tree-nodes="" ng-model="list">
+          <li ng-repeat="item in list" ui-tree-node >
+            <div ui-tree-handle>
+              {{item.title}}
+            </div>
+            <ol ui-tree-nodes="" ng-model="item.nodes">
+              <li ng-repeat="subItem in item.nodes" ui-tree-node >
+                <div ui-tree-handle>
+                  {{subItem.title}}
+                </div>
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </div>
+</body>
+</html>
+

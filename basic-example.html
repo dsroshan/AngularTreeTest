@@ -1,0 +1,90 @@
+<!-- Nested node template -->
+<html>
+    <head>
+        <title> Welcome to signature </title>
+        <link rel="stylesheet" href="js\angular\angular-ui-tree.min.css">
+        <link rel="stylesheet" href="css/app.css"/>
+        <link rel="stylesheet" href="font-awesome/css/font-awesome.css">
+        <link rel="stylesheet" href="font-awesome/css/font-awesome-animation.css">
+        <script type="text/javascript" src="js\angular\angular.1.5.9.js"></script>
+        <script type="text/javascript" src="js\angular\angular-ui-tree.js"></script>
+        <script type="text/javascript" src="js\sample.js"></script>
+    </head>
+
+    <body ng-app="PlantdeskApp" ng-controller="PlantdeskController">
+        <script type="text/ng-template" id="nodes_renderer.html">
+            <div ui-tree-handle class="tree-node tree-node-content angular-ui-tree-handle">
+                <a  ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)">
+            
+                    <i class="fa fa-chevron-right" ng-show='collapsed' aria-hidden="true"></i>
+                    <i class="fa fa-chevron-down" ng-show='!collapsed' aria-hidden="true"></i>
+                </a>
+                {{node.title}}
+                
+                <a class="" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;">
+                <i class="fa fa-plus-square" aria-hidden="true"></i></a>
+            </div>
+            <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+                <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer1.html'">
+                </li>
+            </ol>
+        </script>
+
+        <script type="text/ng-template" id="nodes_renderer1.html">
+            <div ui-tree-handle class="tree-node tree-node-content angular-ui-tree-handle">
+                <a  ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)">
+            
+                    <i class="fa fa-chevron-right" ng-show='collapsed' aria-hidden="true"></i>
+                    <i class="fa fa-chevron-down" ng-show='!collapsed' aria-hidden="true"></i>
+                </a>
+                {{node.title}}
+                <a class="" data-nodrag ng-click="remove(this)">
+                <i class="fa fa-trash" aria-hidden="true"></i></a>
+                <a class="" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;">
+                <i class="fa fa-plus-square" aria-hidden="true"></i></a>
+            </div>
+            <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+                <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer2.html'">
+                </li>
+            </ol>
+        </script>
+
+        <script type="text/ng-template" id="nodes_renderer2.html">
+            <div ui-tree-handle class="tree-node tree-node-content angular-ui-tree-handle">
+                <a  ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)">
+            
+                    <i class="fa fa-chevron-right" ng-show='collapsed' aria-hidden="true"></i>
+                    <i class="fa fa-chevron-down" ng-show='!collapsed' aria-hidden="true"></i>
+                </a>
+                {{node.title}}
+                <a class="" data-nodrag ng-click="remove(this)">
+                <i class="fa fa-trash" aria-hidden="true"></i></a>
+            </div>
+            <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+                <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer2.html'">
+                </li>
+            </ol>
+        </script>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Basic Example</h3>
+                <button ng-click="expandAll()">Expand all</button>
+                <button ng-click="collapseAll()">Collapse all</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div ui-tree id="tree-root" class="angular-ui-tree">
+                <ol ui-tree-nodes ng-model="data">
+                    <li ng-repeat="node in data" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+                </ol>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="info">{{info}}</div>
+                <pre class="code">{{ data | json }}</pre>
+            </div>
+        </div>
+    </body>
+</html>

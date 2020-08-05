@@ -1,0 +1,17 @@
+.red_txt{
+color:red;
+font-size:30px;
+}
+ .menu li
+{
+display:inline;
+background-color:red;
+padding:20px;
+}
+ .menu li:hover 
+{
+display:inline;
+background-color:blue;
+padding:20px;
+}
+
